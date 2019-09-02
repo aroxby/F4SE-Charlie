@@ -90,7 +90,6 @@ void ServiceThread() {
 		else {
 			buffer[bytes_read] = 0;
 			TESForm *searchRet = LookupFormByID(0xdc939);
-			searchRet = NULL;
 			if (!searchRet) {
 				ConsolePrint(hStdOut, "Lookup Failed!\n");
 			}
@@ -122,7 +121,6 @@ DLLFUNC bool F4SEPlugin_Query(const F4SEInterface * f4se, PluginInfo * info) {
 DLLFUNC bool F4SEPlugin_Load(const F4SEInterface * f4se) {
 	DWORD thread_id;
 	AllocConsole();
-	setvbuf(stdout, NULL, _IONBF, 0);
 	HANDLE hThread = CreateThread(NULL, 0, ServiceThreadWrapper, NULL, 0, &thread_id);
 	return hThread != 0;
 }
