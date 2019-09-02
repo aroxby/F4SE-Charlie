@@ -6,6 +6,11 @@
 #include "f4se/GameObjects.h"
 #include "f4se/GameRTTI.h"
 
+class MyAnimationGraphManagerHolder : public IAnimationGraphManagerHolder {
+public:
+	virtual void SendEvent(const BSFixedString* eventName) = 0;
+};
+
 BOOL ConsolePrint(HANDLE hOut, const char *format, ...) {
 	va_list args;
 	va_start(args, format);
@@ -62,12 +67,20 @@ void DumpForm(HANDLE hOut, TESForm *ent) {
 	}
 }
 
+void HackGraph(HANDLE hOut, IAnimationGraphManagerHolder *animGraphHolder) {
+	MyAnimationGraphManagerHolder *graph = (MyAnimationGraphManagerHolder*)animGraphHolder;
+	ConsolePrint(hOut, "Graph: %p, %p\n", graph, &MyAnimationGraphManagerHolder::SendEvent);
+}
+
 void DumpRef(HANDLE hOut, TESObjectREFR *ent) {
 	ConsolePrint(hOut, "Refr (%p):\n", ent);
 	if (ent) {
 		const char *refn = CALL_MEMBER_FN(ent, GetReferenceName)();
 		ConsolePrint(hOut, "RefN: %p[%u] %s\n", refn, nullableStringLength(refn), refn);
 		DumpForm(hOut, ent);
+
+		IAnimationGraphManagerHolder *animGraphHolder = &ent->animGraphHolder;
+		HackGraph(hOut, animGraphHolder);
 	}
 	else {
 		ConsolePrint(hOut, "Null Entity\n");
