@@ -114,7 +114,7 @@ DWORD WINAPI ServiceThreadWrapper(LPVOID) {
 
 DLLFUNC bool F4SEPlugin_Query(const F4SEInterface * f4se, PluginInfo * info) {
 	info->infoVersion = PluginInfo::kInfoVersion;
-	info->name = "Terabyte Test Plugin Bravo";
+	info->name = "Terabyte Test Plugin Charlie";
 	info->version = 1;
 	return true;
 }
