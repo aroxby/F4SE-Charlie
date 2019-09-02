@@ -1,2 +1,6 @@
 *.o
 *.exe
+/.vs/
+Debug/
+x64/
+x64_vc11/
