@@ -112,6 +112,9 @@
     <Link>
       <AdditionalDependencies>"$(SolutionDir)\x64_vc11\Debug\common_vc11.lib";"$(SolutionDir)\x64\Debug\f4se_common.lib";"$(SolutionDir)\x64\Debug\f4se_1_10_138.lib";%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(TargetPath)" "C:\Program Files (x86)\Steam\SteamApps\common\Fallout 4\Data\F4SE\Plugins"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
